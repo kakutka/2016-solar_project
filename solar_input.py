@@ -33,10 +33,11 @@ def read_space_objects_data_from_file(input_filename):
     return objects
 
 
-def parse_star_parameters(line, star):
+def parse_star_parameters(line, star): #парс значит парсить ХАХАХАХАХА
     """Считывает данные о звезде из строки.
     Входная строка должна иметь слеюущий формат:
-    Star <радиус в пикселах> <цвет> <масса> <x> <y> <Vx> <Vy>
+    Star <радиус в пикселях> <цвет> <масса> <x> <y> <Vx> <Vy>
+    
 
     Здесь (x, y) — координаты зведы, (Vx, Vy) — скорость.
     Пример строки:
@@ -47,14 +48,23 @@ def parse_star_parameters(line, star):
     **line** — строка с описание звезды.
     **star** — объект звезды.
     """
-
-    pass  # FIXME: not done yet
+    #pass  # FIXME: not done yet  ,kz а че делать то
+   
+    star.r = float(line.split()[1])
+    star.color = float(line.split()[2])
+    star.m = float(line.split()[3])
+    star.x = float(line.split()[4])
+    star.y = float(line.split()[5])
+    star.Vx = float(line.split()[6])
+    star.Vy = float(line.split()[7])
+                  
+    
 
 def parse_planet_parameters(line, planet):
     """Считывает данные о планете из строки.
     Предполагается такая строка:
     Входная строка должна иметь слеюущий формат:
-    Planet <радиус в пикселах> <цвет> <масса> <x> <y> <Vx> <Vy>
+    Planet <радиус в пикселях> <цвет> <масса> <x> <y> <Vx> <Vy>
 
     Здесь (x, y) — координаты планеты, (Vx, Vy) — скорость.
     Пример строки:
@@ -65,7 +75,14 @@ def parse_planet_parameters(line, planet):
     **line** — строка с описание планеты.
     **planet** — объект планеты.
     """
-    pass  # FIXME: not done yet...
+    #pass  # FIXME: not done yet...
+    planet.r = float(line.split()[1])
+    planet.color = float(line.split()[2])
+    planet.m = float(line.split()[3])
+    planet.x = float(line.split()[4])
+    planet.y = float(line.split()[5])
+    planet.Vx = float(line.split()[6])
+    planet.Vy = float(line.split()[7])
 
 
 def write_space_objects_data_to_file(output_filename, space_objects):
@@ -79,6 +96,7 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     **output_filename** — имя входного файла
     **space_objects** — список объектов планет и звёзд
     """
+    #,kznm зачем надо было сначала читать а потом сохранять обратно cerf 
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
             print(out_file, "%s %d %s %f" % ('1', 2, '3', 4.5))
