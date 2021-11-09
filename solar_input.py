@@ -17,7 +17,7 @@ def read_space_objects_data_from_file(input_filename):
             if len(line.strip()) == 0 or line[0] == '#':
                 continue  # пустые строки и строки-комментарии пропускаем
             object_type = line.split()[0].lower()
-            if object_type == "star":
+            if object_type == "star":  
                 star = Star()
                 parse_star_parameters(line, star)
                 objects.append(star)
@@ -25,6 +25,7 @@ def read_space_objects_data_from_file(input_filename):
                 planet = Planet()
                 parse_planet_parameters(line, planet)
                 objects.append(planet)
+                
 
     return objects
 
@@ -40,10 +41,18 @@ def parse_star_parameters(line, star):
     **line** — строка с описание звезды.
     **star** — объект звезды.
     """
+    
     a = line.split()
-    Star, star.r, star.color, star.m = a[0], float(a[1]), a[2], float(a[3])
-    star.x, star.y, star.Vx, star.Vy = float(a[4]), float(a[5]), float(a[6]), float(a[7])
 
+    star.R = float(a[1])
+    star.color = a[2]
+    star.m = float(a[3])
+
+    star.x = float(a[4])
+    star.y = float(a[5])
+    
+    star.Vx = float(a[6])
+    star.Vy = float(a[7])
 
 
 def parse_planet_parameters(line, planet):
@@ -59,8 +68,17 @@ def parse_planet_parameters(line, planet):
     **planet** — объект планеты.
     """
     a = line.split()
-    Planet, planet.r, planet.color, planet.m = a[0], float(a[1]), a[2], float(a[3])
-    planet.x, planet.y, planet.Vx, planet.Vy = float(a[4]), float(a[5]), float(a[6]), float(a[7])
+
+    planet.R = float(a[1])
+    planet.color = a[2]
+    planet.m = float(a[3])
+
+    planet.x = float(a[4])
+    planet.y = float(a[5])
+    
+    planet.Vx = float(a[6])
+    planet.Vy = float(a[7])
+
 
 def write_space_objects_data_to_file(output_filename, space_objects):
     """Сохраняет данные о космических объектах в файл.
@@ -78,8 +96,6 @@ def write_space_objects_data_to_file(output_filename, space_objects):
             else:
                 print("Planet %d %s %f %f %f %f %f" % (obj.R, obj.color, obj.m, obj.x, obj.y, obj.Vx, obj.Vy), file=out_file)
 
-
-# FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
